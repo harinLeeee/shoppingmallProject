@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="board" style="padding: 50px 0px 0px 300px; width: 1000px;">
+    <h4>문의 게시판</h4>
+    <br/><br/>
+
+    {% for post in posts %}
+        <a href="{% url 'detail' post.id %}"><h5>제목 : {{ post.title }}</h5></a>
+        <h6>작성자 : {{ post.author.username }} 님</h6>
+        <h6>작성날짜 : {{ post.date }}</h6>
+        <hr/>
+        <br/>
+    {% endfor %}
+
+    {% if posts.has_previous %}
+    <a href="?page=1">&lt;&lt;</a>
+    <a href="?page={{posts.previous_page_number}}">&lt;</a>
+    {% endif %}
+
+    <span>{{posts.number}}</span>
+    <span>/</span>
+    <span>{{posts.paginator.num_pages}}</span>
+
+    {% if posts.has_next %}
+    <a href="?page={{posts.next_page_number}}">&gt;</a>
+    <a href="?page={{posts.paginator.num_pages}}">&gt;&gt;</a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <br/><br/><br/>
+    <button><a href="{% url 'create' %}">글 작성하기</a></button>
+    {% endif %}
+</div>
+
+{% endblock %}

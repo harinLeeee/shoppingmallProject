@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div style="padding: 50px 0px 0px 300px; width: 1000px;">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="submit">
+    </form>
+    <br/><br/>
+
+    {% for o in obj %}
+    <img src="{{o.image}}" width="300"><br/>
+    쇼핑몰 : {{o.mallName|safe}}<br/>
+    상품명 : {{o.title|safe}}<br/>
+    <a href="{{ o.link }}">구매하러가기</a><br/>
+    <br/><br/>
+    {% endfor %}
+</div>
+
+{% endblock %}

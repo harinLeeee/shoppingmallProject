@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% block content %}
+
+<main id="main">
+
+    <section class="section pb-5">
+        <div class="container">
+
+            <div class="row mb-5 align-items-end">
+                <div class="col-md-6" data-aos="fade-up">
+                    <h2>로그인</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="row gy-3">
+                            <div class="col-md-6 form-group">
+                                <label for="username">ID</label>
+                                <input type="text" name="username" class="form-control" id="username" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control" id="password" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input type="submit" class="readmore d-block w-100" value="Login">
+                            </div>
+
+                            <!--소셜 로그인-->
+                            <a href="{% provider_login_url 'google' %}">
+                                Login with Google
+                            </a>
+                            <a href="{% provider_login_url 'facebook' %}">
+                                Login with Facebook
+                            </a>
+                            <a href="{% provider_login_url 'naver' %}">
+                                Login with Naver
+                            </a>
+                            <br><br><br>
+                            <a href="{% url 'signup' %}">회원가입</a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main><!-- End #main -->
+
+{% endblock %}

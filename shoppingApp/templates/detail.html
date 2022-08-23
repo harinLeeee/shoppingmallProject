@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div style="padding: 50px 0px 0px 300px; width: 1000px;">
+    <h4>제목</h4>
+    {{ post_detail.title }}
+    <hr/>
+    <br/>
+    <h4>작성자</h4>
+    {{ post_detail.author.username }} 님
+    <hr/>
+    <br/>
+    <h4>날짜</h4>
+    {{ post_detail.date }}
+    <hr/>
+    <br/>
+    <h4>본문</h4>
+    {% if post_detail.photo %}
+    <!-- 사진 찍어주기 -->
+    <img src="{{ post_detail.photo.url }}" alt="" height="300">
+    <br/><br/>
+    {% endif %}
+    {{ post_detail.body }}
+    <hr/>
+    <br/><br/><br/>
+
+    <!-- 댓글 목록 공간 -->
+    <h4>댓글</h4>
+    {% for comment in post_detail.comment_set.all %}
+    <p>{{ comment }}</p>
+    <p>{{ comment.author.username }} 님</p>
+    <p>{{ comment.date }}</p>
+    {% if comment.author.username == user.username %}
+    <button><a href="{% url 'edit_comment' post_detail.id comment.id %}">수정하기</a></button>
+    <button><a href="{% url 'delete_comment' post_detail.id comment.id %}">삭제하기</a></button>
+    {% endif %}
+    <hr>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+    <!-- 댓글 입력 공간 -->
+    <br/><br/>
+    <form method="POST" action="{% url 'new_comment' post_detail.id %}">
+        {% csrf_token %}
+        {{ comment_form }}
+        <input type="submit" value="댓글 입력">
+    </form>
+    {% endif %}
+
+    <br/><br/><br/>
+    <button><a href="{% url 'boards' %}">돌아가기</a></button>
+    {% if post_detail.author.username == user.username %}
+    <button><a href="{% url 'edit' post_detail.id %}">수정하기</a></button>
+    <button><a href="{% url 'delete' post_detail.id %}">삭제하기</a></button>
+    {% endif %}
+</div>
+
+{% endblock %}
