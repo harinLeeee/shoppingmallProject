@@ -28,8 +28,8 @@ SECRET_KEY = get_secret("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-#ALLOWED_HOSTS = ['harin.pythonanywhere.com'] #배포 링크
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['harin0802.pythonanywhere.com'] #배포 링크
+#ALLOWED_HOSTS = []
 
 
 # Application definition
