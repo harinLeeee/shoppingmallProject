@@ -7,4 +7,4 @@
 
 배포 링크 : 'harin.pythonanywhere.com'
 settings.py 설정
-ALLOWED_HOSTS = ['harin.pythonanywhere.com']
+ALLOWED_HOSTS = ['harin0802.pythonanywhere.com']
