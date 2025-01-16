@@ -26,10 +26,10 @@ def get_secret(setting):
 SECRET_KEY = get_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['harin0802.pythonanywhere.com'] #배포 링크
-#ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['harin0802.pythonanywhere.com'] #배포 링크
+ALLOWED_HOSTS = ['*'] #로컬에서 돌릴 때때
 
 
 # Application definition
@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.naver',
 ]
 
@@ -64,7 +64,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'  # 로그인 후 리디렉션할 URL
+SOCIAL_AUTH_NAVER_REDIRECT_URI = 'http://127.0.0.1:8000/accounts/naver/login/callback/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -167,4 +168,5 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_REDIRECT_URL = "/"
+SOCIAL_AUTH_NAVER_KEY = 'vmRzwClqOxCAYMtxdQAie3'      # 네이버에서 받은 클라이언트 ID
+SOCIAL_AUTH_NAVER_SECRET = 'FULIn0gmk5'  # 네이버에서 받은 클라이언트 Secret
